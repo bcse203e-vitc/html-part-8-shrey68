@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Font Size Adjuster</title>
+</head>
+<body>
+
+<h1>Dynamic Font Size Adjuster</h1>
+
+<p id="text-paragraph">This is a paragraph. Its font size can be dynamically adjusted using the buttons below.</p>
+
+
+<button id="increase-btn">Increase Font Size</button>
+<button id="decrease-btn">Decrease Font Size</button>
+
+<script>
+   
+    const paragraph = document.getElementById('text-paragraph');
+    const increaseButton = document.getElementById('increase-btn');
+    const decreaseButton = document.getElementById('decrease-btn');
+
+  
+    let currentFontSize = 16; 
+    paragraph.style.fontSize = currentFontSize + 'px';
+
+    increaseButton.addEventListener('click', () => {
+        currentFontSize += 2; 
+        paragraph.style.fontSize = currentFontSize + 'px'; 
+    });
+
+    decreaseButton.addEventListener('click', () => {
+        if (currentFontSize > 6) { 
+            currentFontSize -= 2;
+            paragraph.style.fontSize = currentFontSize + 'px'; 
+        }
+    });
+</script>
+
+</body>
+</html>
