@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter with Highlighted Repeated Words</title>
+</head>
+<body>
+
+<h1>Word Counter with Highlighted Repeated Words</h1>
+
+<textarea id="text-area" rows="10" cols="50" placeholder="Type your text here..."></textarea>
+<br>
+Word Count: <span id="word-count">0</span>
+
+<script>
+    const textArea = document.getElementById('text-area');
+    const wordCountDisplay = document.getElementById('word-count');
+
+    textArea.addEventListener('input', () => {
+ 
+        const text = textArea.value.trim();
+        
+        const words = text.split(/\s+/).filter(word => word.length > 0);
+        wordCountDisplay.textContent = words.length;
+
+        highlightRepeatedWords(words);
+    });
+
+    function highlightRepeatedWords(words) {
+        const uniqueWords = {};
+        const wordOccurrences = {};
+        words.forEach(word => {
+            word = word.toLowerCase();
+            wordOccurrences[word] = (wordOccurrences[word] || 0) + 1;
+        });
+
+        const originalText = textArea.value;
+        
+        let highlightedText = originalText;
+
+        Object.keys(wordOccurrences).forEach(word => {
+            if (wordOccurrences[word] > 1) {
+                const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                highlightedText = highlightedText.replace(regex, match => `[${match}]`);
+            }
+        });
+        textArea.value = highlightedText;
+    }
+</script>
+
+</body>
+</html>
