@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Carousel</title>
+   
+</head>
+<body>
+
+<h1>Image Carousel</h1>
+
+<div class="carousel-container" id="carousel">
+    <div class="carousel-images" id="carousel-images">
+        <img src="https://th.bing.com/th/id/OIP.ULxP77VJ1vg_RspL1-A7UwHaHa?w=188&h=187&c=7&r=0&o=5&pid=1.7" alt="Image 1">
+        <img src="https://th.bing.com/th/id/OIP.hiMmUETOF-W2CqLzAtrBhAHaE7?w=268&h=180&c=7&r=0&o=5&pid=1.7" alt="Image 2">
+        <img src="https://th.bing.com/th/id/OIP.rM81T2vECiRhkckDanbD9QHaEo?w=285&h=188&c=7&r=0&o=5&pid=1.7" alt="Image 3">
+    </div>
+    <button class="prev" onclick="changeImage(-1)">Previous</button>
+    <button class="next" onclick="changeImage(1)">Next</button>
+</div>
+
+<script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('#carousel-images img');
+    const totalImages = images.length;
+    let autoSlideInterval;
+
+    function updateCarousel() {
+        const carouselImages = document.getElementById('carousel-images');
+        carouselImages.style.transform = `translateX(${-currentIndex * 500}px)`;
+    }
+
+    function changeImage(direction) {
+        currentIndex += direction;
+
+        if (currentIndex < 0) {
+            currentIndex = totalImages - 1;
+        } else if (currentIndex >= totalImages) {
+            currentIndex = 0;
+        }
+
+        updateCarousel();
+    }
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            changeImage(1);
+        }, 3000); 
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    startAutoSlide();
+    const carouselContainer = document.getElementById('carousel');
+    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+    carouselContainer.addEventListener('mouseleave', startAutoSlide);
+    document.querySelector('.prev').addEventListener('click', () => {
+        changeImage(-1);
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+        changeImage(1);
+    });
+</script>
+
+</body>
+</html>
