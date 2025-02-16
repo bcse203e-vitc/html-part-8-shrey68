@@ -5,49 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-Up Form</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input {
-            padding: 10px;
-            width: 100%;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-        }
-        input.valid {
-            border-color: green;
-        }
-        input.invalid {
-            border-color: red;
-        }
-        .message {
-            font-size: 14px;
-            color: red;
-        }
-        .valid-message {
-            color: green;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:disabled {
-            background-color: #ddd;
-            cursor: not-allowed;
-        }
-    </style>
 </head>
 <body>
 
@@ -132,7 +89,6 @@
         }
     };
 
-    // Enable or disable the submit button based on form validation
     const enableSubmitButton = () => {
         if (validateName() && validateEmail() && validatePassword()) {
             submitButton.disabled = false;
@@ -141,7 +97,6 @@
         }
     };
 
-    // Event listeners for real-time validation
     nameInput.addEventListener('input', () => {
         validateName();
         enableSubmitButton();
@@ -155,12 +110,10 @@
         enableSubmitButton();
     });
 
-    // Form submission handler
     document.getElementById('signupForm').addEventListener('submit', (e) => {
         e.preventDefault();
         if (validateName() && validateEmail() && validatePassword()) {
             alert('Form Submitted Successfully!');
-            // You can add further logic to handle form submission here
         }
     });
 </script>
